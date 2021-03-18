@@ -3,10 +3,10 @@ version: 2.1
 jobs:
   get-changes: 
     docker:
-      auth:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
-      image: cimg/base:2020.01
+      - image: cimg/base:2020.01
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - run: echo "checked out the code! (Hopefully)"
