@@ -16,10 +16,10 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${pr_number} \
           )
-          echo pull_request: $pull_request
+          echo pull_request: "$pull_request"
           baseSHA=$($pull_request | jq -r '.base.ref')
-          echo baseSHA $baseSHA
-          echo CIRCLE_SHA1 $CIRCLE_SHA1
+          echo baseSHA: "$baseSHA"
+          echo CIRCLE_SHA1: "$CIRCLE_SHA1"
           git diff $CIRCLE_SHA1 $baseSHA --name-only
       - checkout
       - run: echo "checked out the code! (Hopefully)"
