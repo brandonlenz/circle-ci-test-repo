@@ -19,9 +19,7 @@ jobs:
             https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${pr_number} \
             | jq -r '.base.sha'
           )
-          echo baseSHA: "$baseSHA"
-          echo CIRCLE_SHA1: "$CIRCLE_SHA1"
-          echo $(git diff $CIRCLE_SHA1 $baseSHA --name-only)
+          echo $(git diff $baseSHA $CIRCLE_SHA1 --name-only)
 
 orbs:
   jq: circleci/jq@2.2.0
@@ -29,4 +27,6 @@ orbs:
 workflows:
   build:
     jobs:
-      - get-changes
+      - get-changes:
+        context:
+          - org-global
