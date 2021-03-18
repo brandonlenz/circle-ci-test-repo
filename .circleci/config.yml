@@ -8,6 +8,7 @@ jobs:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
     steps:
+      - run : echo $CIRCLE_PULL_REQUEST
       - checkout
       - run: echo "checked out the code! (Hopefully)"
 
