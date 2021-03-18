@@ -22,6 +22,7 @@ jobs:
               | jq -r '.base.sha'
             )
             git diff "$base_SHA" "$CIRCLE_SHA1" --name-only
+            echo "${TERM}"
 
 # orbs:
 #   jq: circleci/jq@2.2.0
