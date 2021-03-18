@@ -8,7 +8,6 @@ jobs:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
     steps:
-      # - jq/install
       - checkout
       - run: 
           name: "git PR diff"
@@ -23,9 +22,8 @@ jobs:
             )
             git diff "$base_SHA" "$CIRCLE_SHA1" --name-only
             echo "${TERM}"
-
-# orbs:
-#   jq: circleci/jq@2.2.0
+          environment:
+            TERM: xterm-256color
 
 workflows:
   build:
