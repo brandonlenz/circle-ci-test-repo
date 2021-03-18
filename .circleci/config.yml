@@ -9,19 +9,17 @@ jobs:
           password: $DOCKER_PASSWORD
     steps:
       - run: |
-          echo CIRCLE_PULL_REQUEST $CIRCLE_PULL_REQUEST
-          echo CIRCLE_PR_REPONAME $CIRCLE_PR_REPONAME
-          echo CIRCLE_PROJECT_REPONAME $CIRCLE_PROJECT_REPONAME
-          echo CIRCLE_PROJECT_USERNAME $CIRCLE_PROJECT_USERNAME
-          echo CIRCLE_PR_NUMBER $CIRCLE_PR_NUMBER
-      - run: |
           pr_number=${CIRCLE_PULL_REQUEST##*/}
           pull_request=$( \
             curl \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${pr_number} \
           )
-          echo $pull_request
+          echo pull_request: $pull_request
+          baseSHA={$pull_request | jq -r '.base.ref'}
+          echo baseSHA $baseSHA
+          echo CIRCLE_SHA1 $CIRCLE_SHA1
+          git diff $CIRCLE_SHA1 $baseSHA
       - checkout
       - run: echo "checked out the code! (Hopefully)"
 
