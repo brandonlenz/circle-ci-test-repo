@@ -28,5 +28,5 @@ workflows:
   build:
     jobs:
       - get-changes:
-        context:
-          - org-global
+          context:
+            - org-global
