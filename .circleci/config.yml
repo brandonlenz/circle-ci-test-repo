@@ -12,14 +12,14 @@ jobs:
       - checkout
       - run: |
           pr_number=${CIRCLE_PULL_REQUEST##*/}
-          baseSHA=$( \
+          base_SHA=$( \
             curl \
             -s \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${pr_number} \
             | jq -r '.base.sha'
           )
-          echo $(git diff $baseSHA $CIRCLE_SHA1 --name-only)
+          echo $(git diff $base_SHA $CIRCLE_SHA1 --name-only)
 
 orbs:
   jq: circleci/jq@2.2.0
