@@ -3,15 +3,15 @@ version: 2.1
 jobs:
   get-changes: 
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.01
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
     steps:
-      - jq/install
+      # - jq/install
       - checkout
       - run: 
-          name: "Get git diff"
+          name: "git PR diff"
           command: |
             pr_number=${CIRCLE_PULL_REQUEST##*/}
             base_SHA=$( \
@@ -23,8 +23,8 @@ jobs:
             )
             git diff "$base_SHA" "$CIRCLE_SHA1" --name-only
 
-orbs:
-  jq: circleci/jq@2.2.0
+# orbs:
+#   jq: circleci/jq@2.2.0
 
 workflows:
   build:
