@@ -21,7 +21,6 @@ jobs:
               | jq -r '.base.sha'
             )
             git diff "$base_SHA" "$CIRCLE_SHA1" --name-only
-            echo "${TERM}"
           environment:
             TERM: xterm-256color
 
