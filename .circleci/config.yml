@@ -8,7 +8,14 @@ jobs:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
     steps:
-      - run : echo $CIRCLE_PULL_REQUEST
+      - run: echo $CIRCLE_PULL_REQUEST
+      - run: |
+          pull_request=$( \
+            curl \
+            -H "Accept: application/vnd.github.v3+json" \
+            ${CIRCLE_PULL_REQUEST} \
+          )
+          echo $pull_request
       - checkout
       - run: echo "checked out the code! (Hopefully)"
 
