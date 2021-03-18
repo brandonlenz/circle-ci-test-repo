@@ -17,10 +17,10 @@ jobs:
             https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls/${pr_number} \
           )
           echo pull_request: $pull_request
-          baseSHA=($pull_request | jq -r `.base.ref`)
+          baseSHA=$($pull_request | jq -r `.base.ref`)
           echo baseSHA $baseSHA
           echo CIRCLE_SHA1 $CIRCLE_SHA1
-          git diff $CIRCLE_SHA1 $baseSHA
+          git diff $CIRCLE_SHA1 $baseSHA --name-only
       - checkout
       - run: echo "checked out the code! (Hopefully)"
 
