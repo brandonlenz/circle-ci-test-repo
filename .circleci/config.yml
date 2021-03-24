@@ -1,12 +1,16 @@
 version: 2.1
 
-jobs:
-  get-changes: 
+executors:
+  main:
     docker:
-      - image: cimg/base:2021.01
-        auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+        - image: cimg/base:2021.01
+          auth:
+            username: $DOCKER_USERNAME
+            password: $DOCKER_PASSWORD
+
+jobs:
+  get-pull-request-changes: 
+    executor: main
     steps:
       - checkout
       - run: 
@@ -27,6 +31,6 @@ jobs:
 workflows:
   build:
     jobs:
-      - get-changes:
+      - get-pull-request-changes:
           context:
             - org-global
