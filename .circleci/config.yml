@@ -3,10 +3,10 @@ version: 2.1
 executors:
   main:
     docker:
-        - image: cimg/base:2021.01
-          auth:
-            username: $DOCKER_USERNAME
-            password: $DOCKER_PASSWORD
+      - image: cimg/base:2021.01
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
 
 jobs:
   get-pull-request-changes: 
